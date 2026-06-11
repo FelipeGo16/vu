@@ -245,3 +245,12 @@ body{
     background:#b7002b;
     color:white;
 }
+
+.fondo-institucional{
+    background-image: url("../images/Imagen_Inicial.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    position: relative;
+}

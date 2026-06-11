@@ -1,39 +1,26 @@
 {% extends 'layout.html' %} {% block title %} Inicio Sesión {% endblock %} {%
 block content %}
 
+<!-- Barra GOV -->
+
 <div class="barra-gov">
-  <img
-    src="{{ url_for('static', filename='images/logo_gov.png') }}"
-    class="logo-gov"
-  />
+  
 </div>
 
 <div class="container-fluid p-0">
+  
   <div class="row g-0 vh-100">
-    <div class="col-lg-8 fondo-institucional">
-      <div class="contenido-izquierdo">
-        <div class="titulo-bogota">
-          AQUÍ<br />
-          SÍ PASA<br />
-          BOGOTÁ<br />
-          MI CIUDAD<br />
-          MI CASA
-        </div>
+    <!-- PANEL IZQUIERDO -->
+    <div class="col-lg-8 fondo-institucional"></div>
 
-        <div class="logos-footer">
-          <img
-            src="{{ url_for('static', filename='images/logos_entidades.png') }}"
-            class="img-fluid"
-          />
-        </div>
-      </div>
-    </div>
-
+    <!-- PANEL LOGIN -->
     <div class="col-lg-4 panel-login">
       <div class="login-box">
-        <h1 class="titulo-login">VENTANILLA ÚNICA</h1>
+        <div class="text-center mb-4">
+          <h1 class="titulo-login">VENTANILLA ÚNICA</h1>
 
-        <p>Bienvenido. Por favor identifíquese:</p>
+          <p class="text-muted">Bienvenido. Por favor identifíquese</p>
+        </div>
 
         {% if error %}
 
@@ -43,27 +30,35 @@ block content %}
 
         <form action="/validar" method="POST">
           <div class="mb-3">
-            <label> Usuario </label>
-
-            <input type="text" name="usuario" class="form-control" required />
-          </div>
-
-          <div class="mb-4">
-            <label> Contraseña </label>
+            <label class="form-label fw-semibold"> Usuario </label>
 
             <input
-              type="password"
-              name="password"
-              class="form-control"
+              type="text"
+              name="usuario"
+              class="form-control form-control-lg"
               required
             />
           </div>
 
-          <button class="btn btn-danger w-100">INICIAR SESIÓN</button>
+          <div class="mb-4">
+            <label class="form-label fw-semibold"> Contraseña </label>
+
+            <input
+              type="password"
+              name="password"
+              class="form-control form-control-lg"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn btn-danger w-100 py-2">
+            INICIAR SESIÓN
+          </button>
         </form>
       </div>
     </div>
   </div>
+  
 </div>
 
 {% endblock %}
