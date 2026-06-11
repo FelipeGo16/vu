@@ -1,0 +1,247 @@
+body{
+    font-family:'Segoe UI',sans-serif;
+}
+
+.barra-gov{
+    height:60px;
+    background:#d50032;
+    display:flex;
+    align-items:center;
+    padding-left:30px;
+}
+
+.logo-gov{
+    height:40px;
+}
+
+.fondo-institucional{
+    background:#f5b325;
+    position:relative;
+}
+
+.titulo-bogota{
+
+    color:white;
+
+    font-size:60px;
+    font-weight:bold;
+
+    margin-top:120px;
+    margin-left:80px;
+}
+
+.logos-footer{
+
+    position:absolute;
+
+    bottom:40px;
+    left:80px;
+}
+
+.panel-login{
+
+    background:#efefef;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.login-box{
+
+    width:80%;
+}
+
+.titulo-login{
+
+    font-weight:700;
+    color:#202040;
+}
+
+.barra-superior{
+
+    background:#8c0016;
+    color:white;
+}
+
+.menu-lista{
+
+    list-style:none;
+    padding:0;
+}
+
+.menu-lista li{
+
+    padding:15px;
+    margin-bottom:10px;
+    border-radius:10px;
+}
+
+.menu-lista li:hover{
+
+    background:#f4f4f4;
+}
+
+.activo{
+
+    background:#f4f4f4;
+    color:red;
+}
+
+.accesibilidad{
+
+    position:fixed;
+
+    right:10px;
+    bottom:120px;
+
+    z-index:999;
+}
+
+.accesibilidad button{
+
+    width:55px;
+    height:55px;
+
+    display:block;
+
+    border:none;
+
+    margin-bottom:5px;
+
+    background:#005ea6;
+
+    color:white;
+
+    border-radius:12px;
+}
+
+.btn-ayuda{
+
+    width:70px;
+    height:70px;
+
+    border:none;
+
+    border-radius:50%;
+
+    position:fixed;
+
+    right:15px;
+    bottom:20px;
+
+    background:#0078ff;
+    color:white;
+
+    font-size:28px;
+}
+
+@media(max-width:992px){
+
+    .fondo-institucional{
+
+        display:none;
+    }
+
+    .panel-login{
+
+        min-height:100vh;
+    }
+}
+
+/* =========================
+   CREACIÓN OFERTA
+========================= */
+
+.formulario-card{
+    border-radius:12px;
+    background:#fff;
+}
+
+.barra-superior{
+    background:#f0b64d;
+    color:#333;
+    font-weight:500;
+}
+
+.stepper{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.step-item{
+    text-align:center;
+}
+
+.step-circle{
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    background:#d50032;
+    color:white;
+    font-size:28px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:auto;
+}
+
+.step-disabled{
+    background:white;
+    color:#666;
+    border:2px solid #bfbfbf;
+}
+
+.step-line{
+    width:350px;
+    height:2px;
+    background:#dcdcdc;
+    margin:0 30px;
+}
+
+.step-label{
+    margin-top:10px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.accordion-button{
+    font-weight:700;
+    font-size:14px;
+    background:white;
+}
+
+.form-label{
+    font-size:14px;
+    font-weight:600;
+    color:#333;
+}
+
+.form-control,
+.form-select{
+    height:42px;
+}
+
+.btn-cancelar{
+    background:#9b001b;
+    color:white;
+    border:none;
+}
+
+.btn-cancelar:hover{
+    background:#7c0015;
+    color:white;
+}
+
+.btn-resumen{
+    background:#d50032;
+    color:white;
+    border:none;
+}
+
+.btn-resumen:hover{
+    background:#b7002b;
+    color:white;
+}

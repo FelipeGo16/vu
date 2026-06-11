@@ -1,0 +1,206 @@
+{% extends 'layout.html' %} {% block title %} Editar Oferta {% endblock %} {%
+block content %}
+
+<div class="barra-superior py-2 px-4">
+  <small>Inicio > Administración Oferta CDC > Editar Oferta</small>
+</div>
+
+<div class="container-fluid py-4 px-4">
+  ```
+  <div class="card shadow-sm border-0 formulario-card">
+    <div class="card-body p-4 p-lg-5">
+      <h2 class="fw-bold mb-5">Editar Oferta</h2>
+
+      <form
+        action="{{ url_for('editar_oferta', id=oferta.id) }}"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <div class="row mb-3">
+          <label class="col-lg-3 col-form-label"> Título del Curso </label>
+
+          <div class="col-lg-9">
+            <input
+              type="text"
+              class="form-control"
+              name="titulo_curso"
+              value="{{ oferta.titulo_curso }}"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-lg-3 col-form-label"> Descripción </label>
+
+          <div class="col-lg-9">
+            <textarea class="form-control" rows="3" name="descripcion" required>
+{{ oferta.descripcion }}</textarea
+            >
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-lg-3 col-form-label"> Temática </label>
+
+          <div class="col-lg-9">
+            <select class="form-select" name="tematica">
+              <option value="{{ oferta.tematica }}" selected>
+                {{ oferta.tematica }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-lg-3 col-form-label"> Entidad Oferente </label>
+
+          <div class="col-lg-9">
+            <input
+              type="text"
+              class="form-control"
+              name="entidad_oferente"
+              value="{{ oferta.entidad_oferente }}"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-lg-3 col-form-label"> Localidad </label>
+
+          <div class="col-lg-9">
+            <input
+              type="text"
+              class="form-control"
+              name="localidad"
+              value="{{ oferta.localidad }}"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-lg-3 col-form-label">
+            Unidad Operativa (CDC)
+          </label>
+
+          <div class="col-lg-9">
+            <input
+              type="text"
+              class="form-control"
+              name="unidad_operativa"
+              value="{{ oferta.unidad_operativa }}"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-lg-3 col-form-label">
+            Espacio físico asignado
+          </label>
+
+          <div class="col-lg-9">
+            <input
+              type="text"
+              class="form-control"
+              name="espacio_fisico"
+              value="{{ oferta.espacio_fisico }}"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-lg-3 col-form-label"> Fecha Inicio </label>
+
+          <div class="col-lg-9">
+            <input
+              type="date"
+              class="form-control"
+              name="fecha_inicio"
+              value="{{ oferta.fecha_inicio }}"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-lg-3 col-form-label"> Fecha Finalización </label>
+
+          <div class="col-lg-9">
+            <input
+              type="date"
+              class="form-control"
+              name="fecha_finalizacion"
+              value="{{ oferta.fecha_finalizacion }}"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-lg-3 col-form-label"> Horario </label>
+
+          <div class="col-lg-9">
+            <input
+              type="text"
+              class="form-control"
+              name="horario"
+              value="{{ oferta.horario }}"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-lg-3 col-form-label"> Modalidad </label>
+
+          <div class="col-lg-9">
+            <select class="form-select" name="modalidad">
+              <option value="{{ oferta.modalidad }}" selected>
+                {{ oferta.modalidad }}
+              </option>
+
+              <option>PRESENCIAL</option>
+              <option>VIRTUAL</option>
+              <option>HÍBRIDA</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-lg-3 col-form-label"> Costo </label>
+
+          <div class="col-lg-9">
+            <input
+              type="text"
+              class="form-control"
+              name="costo"
+              value="{{ oferta.costo }}"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <label class="col-lg-3 col-form-label"> Imagen Representativa </label>
+
+          <div class="col-lg-9">
+            <input
+              type="file"
+              class="form-control"
+              name="imagen_representativa"
+            />
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="text-end">
+          <a href="{{ url_for('admin_oferta') }}" class="btn btn-secondary">
+            Cancelar
+          </a>
+
+          <button type="submit" class="btn btn-danger">Guardar Cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  ```
+</div>
+
+{% endblock %}

@@ -1,0 +1,705 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Creación de Oferta
+{% endblock %}
+
+{% block content %}
+
+<nav class="navbar navbar-dark barra-superior">
+
+    <div class="container-fluid">
+
+        <button
+        class="btn btn-warning"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#menuLateral">
+
+            <i class="fa fa-bars"></i>
+
+        </button>
+
+        <span class="texto-navbar">
+
+            SECRETARÍA DE INTEGRACIÓN SOCIAL BOGOTÁ D.C.
+
+        </span>
+
+        <span>
+
+            Usuario:
+            {{ session.usuario }}
+
+        </span>
+
+    </div>
+
+</nav>
+
+<div
+class="offcanvas offcanvas-start"
+tabindex="-1"
+id="menuLateral">
+
+    <div class="offcanvas-header bg-warning">
+
+        <img
+        src="{{ url_for('static', filename='images/logos_entidades.png') }}"
+        width="250">
+
+        <button
+        class="btn-close">
+        </button>
+
+    </div>
+
+    <div class="offcanvas-body">
+
+        <ul class="menu-lista">
+
+            <li>
+
+                <i class="fa-solid fa-users"></i>
+
+                Consulta de Ciudadanos
+
+            </li>
+
+            <li class="activo">
+
+                <i class="fa-solid fa-bullhorn"></i>
+
+                Administración Oferta CDC
+
+            </li>
+
+            <li>
+
+                <i class="fa-solid fa-file-signature"></i>
+
+                Postulaciones
+
+            </li>
+
+            <li>
+
+                <i class="fa-solid fa-map-location-dot"></i>
+
+                Abordaje Territorial
+
+            </li>
+
+        </ul>
+
+        <a
+        href="/logout"
+        class="btn btn-outline-danger w-100 mt-5">
+
+            Cerrar Sesión
+
+        </a>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+<div class="container my-5">
+
+    <!-- Título -->
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="fw-bold text-dark">
+                Creación de Oferta
+            </h2>
+        </div>
+    </div>
+
+    <!-- Indicador de pasos -->
+    <div class="row justify-content-center mb-5">
+
+        <div class="col-md-8">
+
+            <div class="d-flex justify-content-center align-items-center">
+
+                <div class="text-center">
+
+                    <div class="step-active">
+                        1
+                    </div>
+
+                    <small>
+                        INFORMACIÓN BÁSICA Y OPERATIVA
+                    </small>
+
+                </div>
+
+                <div class="step-line"></div>
+
+                <div class="text-center">
+
+                    <div class="step-inactive">
+                        2
+                    </div>
+
+                    <small>
+                        RESUMEN
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Mensajes -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+
+    {% for category, message in messages %}
+
+    <div class="alert alert-{{ category if category != 'error' else 'danger' }} alert-dismissible fade show">
+
+        {{ message }}
+
+        <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert">
+        </button>
+
+    </div>
+
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <!-- Formulario -->
+    <form
+        action="{{ url_for('crear_oferta') }}"
+        method="POST"
+        enctype="multipart/form-data">
+
+        <div class="card shadow-sm border-0">
+
+            <div class="card-header bg-white">
+
+                <h6 class="mb-0 text-uppercase fw-bold">
+
+                    Información Básica y Operativa de la Oferta
+
+                </h6>
+
+            </div>
+
+            <div class="card-body">
+
+                <!-- Título Curso -->
+                <div class="row mb-3">
+
+                    <label class="col-md-3 col-form-label">
+                        Título del Curso *
+                    </label>
+
+                    <div class="col-md-9">
+
+                        <input
+                            type="text"
+                            name="titulo_curso"
+                            class="form-control"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <!-- Descripción -->
+                <div class="row mb-3">
+
+                    <label class="col-md-3 col-form-label">
+                        Descripción *
+                    </label>
+
+                    <div class="col-md-9">
+
+                        <textarea
+                            name="descripcion"
+                            class="form-control"
+                            rows="3"
+                            required></textarea>
+
+                    </div>
+
+                </div>
+
+                <!-- Temática -->
+                <div class="row mb-3">
+
+                    <label class="col-md-3 col-form-label">
+                        Temática *
+                    </label>
+
+                    <div class="col-md-9">
+
+                        <select
+                            class="form-select"
+                            name="tematica"
+                            required>
+
+                            <option value="">
+                                Seleccione
+                            </option>
+
+                            <option>Temática 1</option>
+                            <option>Temática 2</option>
+                            <option>Temática 3</option>
+                            <option>Temática 4</option>
+                            <option>Temática 5</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <!-- Entidad -->
+                <div class="row mb-3">
+
+                    <label class="col-md-3 col-form-label">
+                        Entidad Oferente *
+                    </label>
+
+                    <div class="col-md-9">
+
+                        <input
+                            type="text"
+                            name="entidad_oferente"
+                            class="form-control"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <!-- Localidad -->
+                <div class="row mb-3">
+
+                    <label class="col-md-3 col-form-label">
+                        Localidad *
+                    </label>
+
+                    <div class="col-md-9">
+
+                        <select
+                            class="form-select"
+                            name="localidad"
+                            required>
+
+                            <option value="">
+                                Seleccione
+                            </option>
+
+                            <option>USAQUÉN</option>
+                            <option>CHAPINERO</option>
+                            <option>SANTA FE</option>
+                            <option>SAN CRISTÓBAL</option>
+                            <option>USME</option>
+                            <option>TUNJUELITO</option>
+                            <option>BOSA</option>
+                            <option>KENNEDY</option>
+                            <option>FONTIBÓN</option>
+                            <option>ENGATIVÁ</option>
+                            <option>SUBA</option>
+                            <option>BARRIOS UNIDOS</option>
+                            <option>LOS MÁRTIRES</option>
+                            <option>TEUSAQUILLO</option>
+                            <option>ANTONIO NARIÑO</option>
+                            <option>PUENTE ARANDA</option>
+                            <option>CANDELARIA</option>
+                            <option>RAFAEL URIBE URIBE</option>
+                            <option>CIUDAD BOLÍVAR</option>
+                            <option>SUMAPAZ</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <!-- Unidad Operativa -->
+                <div class="row mb-3">
+
+                    <label class="col-md-3 col-form-label">
+                        Unidad Operativa (CDC) *
+                    </label>
+
+                    <div class="col-md-9">
+
+                        <select
+                            class="form-select"
+                            name="unidad_operativa"
+                            required>
+
+                            <option value="">
+                                Seleccione
+                            </option>
+
+                            <option>CDC 1</option>
+                            <option>CDC 2</option>
+                            <option>CDC 3</option>
+                            <option>CDC 4</option>
+                            <option>CDC 5</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <!-- Espacio -->
+                <div class="row mb-3">
+
+                    <label class="col-md-3 col-form-label">
+                        Espacio Físico *
+                    </label>
+
+                    <div class="col-md-9">
+
+                        <select
+                            class="form-select"
+                            name="espacio_fisico"
+                            required>
+
+                            <option value="">
+                                Seleccione
+                            </option>
+
+                            <option>ESPACIO 1</option>
+                            <option>ESPACIO 2</option>
+                            <option>ESPACIO 3</option>
+                            <option>ESPACIO 4</option>
+                            <option>ESPACIO 5</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <!-- Fechas -->
+                <div class="row mb-3">
+
+                    <label class="col-md-3 col-form-label">
+                        Fecha Inicio *
+                    </label>
+
+                    <div class="col-md-9">
+
+                        <input
+                            type="date"
+                            class="form-control"
+                            name="fecha_inicio"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <div class="row mb-3">
+
+                    <label class="col-md-3 col-form-label">
+                        Fecha Finalización *
+                    </label>
+
+                    <div class="col-md-9">
+
+                        <input
+                            type="date"
+                            class="form-control"
+                            name="fecha_finalizacion"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <!-- Horario -->
+                <div class="row mb-3">
+
+                    <label class="col-md-3 col-form-label">
+                        Horario *
+                    </label>
+
+                    <div class="col-md-9">
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="horario"
+                            placeholder="Lunes a Viernes 8 AM - 12 PM"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <!-- Asignación -->
+                <div class="row mb-3">
+
+                    <label class="col-md-3 col-form-label">
+                        Asignación Oferta *
+                    </label>
+
+                    <div class="col-md-9">
+
+                        <select
+                            class="form-select"
+                            id="asignacion_oferta"
+                            name="asignacion_oferta"
+                            required>
+
+                            <option value="">
+                                Seleccione
+                            </option>
+
+                            <option value="CUPO(S)">
+                                CUPO(S)
+                            </option>
+
+                            <option value="DEMANDA">
+                                DEMANDA
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <!-- Cupos -->
+                <div
+                    id="contenedor_cupos"
+                    class="row mb-3 d-none">
+
+                    <label class="col-md-3 col-form-label">
+                        Número de Cupos
+                    </label>
+
+                    <div class="col-md-9">
+
+                        <input
+                            type="number"
+                            id="numero_cupos"
+                            name="numero_cupos"
+                            class="form-control">
+
+                    </div>
+
+                </div>
+
+                <!-- Imagen -->
+                <div class="row mb-3">
+
+                    <label class="col-md-3 col-form-label">
+                        Imagen Representativa
+                    </label>
+
+                    <div class="col-md-9">
+
+                        <input
+                            type="file"
+                            class="form-control"
+                            name="imagen_representativa">
+
+                    </div>
+
+                </div>
+
+                <!-- Modalidad -->
+                <div class="row mb-3">
+
+                    <label class="col-md-3 col-form-label">
+                        Modalidad *
+                    </label>
+
+                    <div class="col-md-9">
+
+                        <select
+                            class="form-select"
+                            name="modalidad"
+                            required>
+
+                            <option value="">
+                                Seleccione
+                            </option>
+
+                            <option>PRESENCIAL</option>
+                            <option>VIRTUAL</option>
+                            <option>HÍBRIDA</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <!-- Costo -->
+                <div class="row mb-3">
+
+                    <label class="col-md-3 col-form-label">
+                        Costo *
+                    </label>
+
+                    <div class="col-md-9">
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="costo"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <!-- Requisitos -->
+                <div class="row mb-3">
+
+                    <label class="col-md-3 col-form-label">
+                        Requisitos
+                    </label>
+
+                    <div class="col-md-9">
+
+                        <textarea
+                            class="form-control"
+                            name="requisitos"
+                            rows="3"></textarea>
+
+                    </div>
+
+                </div>
+
+                <!-- Documentos -->
+                <div class="row mb-4">
+
+                    <label class="col-md-3 col-form-label">
+                        Documentos Requeridos
+                    </label>
+
+                    <div class="col-md-9">
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="documentos" value="Documento de identidad">
+                            <label class="form-check-label">
+                                Documento de identidad
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="documentos" value="Recibo servicio público">
+                            <label class="form-check-label">
+                                Recibo servicio público
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="documentos" value="Carta compromiso">
+                            <label class="form-check-label">
+                                Carta compromiso
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="d-flex justify-content-end gap-2">
+
+                    <a
+                        href="{{ url_for('admin_oferta') }}"
+                        class="btn btn-secondary">
+
+                        Cancelar
+
+                    </a>
+
+                    <button
+                        type="submit"
+                        name="accion"
+                        value="borrador"
+                        class="btn btn-warning">
+
+                        Guardar Borrador
+
+                    </button>
+
+                    <button
+                        type="submit"
+                        name="accion"
+                        value="continuar"
+                        class="btn btn-danger">
+
+                        Continuar
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    const selectAsignacion =
+        document.getElementById("asignacion_oferta");
+
+    const contenedorCupos =
+        document.getElementById("contenedor_cupos");
+
+    const inputCupos =
+        document.getElementById("numero_cupos");
+
+    selectAsignacion.addEventListener("change", function(){
+
+        if(this.value === "CUPO(S)"){
+
+            contenedorCupos.classList.remove("d-none");
+            inputCupos.setAttribute("required","required");
+
+        }else{
+
+            contenedorCupos.classList.add("d-none");
+            inputCupos.removeAttribute("required");
+            inputCupos.value = "";
+
+        }
+
+    });
+
+});
+
+</script>
+
+{% endblock %}

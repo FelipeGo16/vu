@@ -1,0 +1,269 @@
+{% extends 'layout.html' %} {% block title %} Administración Oferta CDC {%
+endblock %} {% block content %}
+
+<!-- Barra Superior -->
+
+<nav class="navbar navbar-dark barra-superior shadow-sm">
+  <div class="container-fluid">
+    <div class="d-flex align-items-center">
+      <button
+        class="btn btn-warning me-3"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#menuLateral"
+      >
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <span class="fw-bold"> SECRETARÍA DISTRITAL DE INTEGRACIÓN SOCIAL </span>
+    </div>
+
+    <div>
+      <span class="me-3">
+        <i class="fa-solid fa-user"></i>
+
+        {{ session.usuario }}
+      </span>
+    </div>
+  </div>
+</nav>
+
+<!-- Menú Lateral -->
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="menuLateral">
+  <div class="offcanvas-header bg-warning">
+    <img
+      src="{{ url_for('static',
+            filename='images/logos_entidades.png') }}"
+      class="img-fluid"
+      width="250"
+    />
+
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="offcanvas"
+    ></button>
+  </div>
+
+  <div class="offcanvas-body">
+    <ul class="list-group border-0">
+      <li class="list-group-item border-0">
+        <i class="fa-solid fa-users me-2"></i>
+
+        Consulta de Ciudadanos
+      </li>
+
+      <li class="list-group-item active">
+        <i class="fa-solid fa-bullhorn me-2"></i>
+
+        Administración Oferta CDC
+      </li>
+
+      <li class="list-group-item border-0">
+        <i class="fa-solid fa-file-signature me-2"></i>
+
+        Postulaciones
+      </li>
+
+      <li class="list-group-item border-0">
+        <i class="fa-solid fa-map-location-dot me-2"></i>
+
+        Abordaje Territorial
+      </li>
+    </ul>
+
+    <hr />
+
+    <a href="{{ url_for('logout') }}" class="btn btn-outline-danger w-100">
+      <i class="fa-solid fa-right-from-bracket"></i>
+
+      Cerrar Sesión
+    </a>
+  </div>
+</div>
+
+<!-- Contenido Principal -->
+
+<div class="container-fluid py-4">
+  <!-- Encabezado -->
+
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <h2 class="fw-bold">Administración Oferta CDC</h2>
+    </div>
+
+    <div class="col-md-6 text-md-end">
+      <a href="{{ url_for('nueva_oferta') }}" class="btn btn-success">
+        <i class="fa-solid fa-plus"></i>
+
+        Nueva Oferta
+      </a>
+    </div>
+  </div>
+
+  <!-- Mensajes Flash -->
+
+  {% with messages = get_flashed_messages(with_categories=true) %} {% if
+  messages %} {% for category, message in messages %}
+
+  <div class="alert alert-{{ category }} alert-dismissible fade show">
+    {{ message }}
+
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+
+  {% endfor %} {% endif %} {% endwith %}
+
+  <!-- Card Principal -->
+
+  <div class="card shadow-sm border-0">
+    <div class="card-header bg-white">
+      <div class="row">
+        <div class="col-md-4">
+          <h5 class="mb-0">Ofertas Registradas</h5>
+        </div>
+
+        <div class="col-md-8">
+          <form method="GET" class="row g-2">
+            <div class="col-md-4">
+              <input
+                type="text"
+                class="form-control"
+                name="buscar"
+                placeholder="Buscar curso"
+              />
+            </div>
+
+            <div class="col-md-3">
+              <select class="form-select" name="localidad">
+                <option value="">Todas las localidades</option>
+
+                <option>USAQUÉN</option>
+                <option>SUBA</option>
+                <option>BOSA</option>
+                <option>KENNEDY</option>
+              </select>
+            </div>
+
+            <div class="col-md-3">
+              <select class="form-select" name="modalidad">
+                <option value="">Todas</option>
+
+                <option>PRESENCIAL</option>
+                <option>VIRTUAL</option>
+                <option>HÍBRIDA</option>
+              </select>
+            </div>
+
+            <div class="col-md-2">
+              <button class="btn btn-primary w-100">Buscar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover table-bordered align-middle">
+          <thead class="table-warning">
+            <tr>
+              <th>ID</th>
+              <th>Título</th>
+              <th>Localidad</th>
+              <th>Unidad Operativa</th>
+              <th>Fecha Inicio</th>
+              <th>Fecha Fin</th>
+              <th>Modalidad</th>
+              <th>Cupos</th>
+              <th>Estado</th>
+              <th width="220">Acciones</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% if ofertas %} {% for oferta in ofertas %}
+
+            <tr>
+              <td>{{ oferta['id'] }}</td>
+
+              <td>{{ oferta['titulo_curso'] }}</td>
+
+              <td>{{ oferta['localidad'] }}</td>
+
+              <td>{{ oferta['unidad_operativa'] }}</td>
+
+              <td>{{ oferta['fecha_inicio'] }}</td>
+
+              <td>{{ oferta['fecha_finalizacion'] }}</td>
+
+              <td>{{ oferta['modalidad'] }}</td>
+
+              <td>{{ oferta['numero_cupos'] }}</td>
+
+              <td>
+                <span class="badge bg-success"> REGISTRADA </span>
+              </td>
+
+              <td>
+                <div class="btn-group">
+                  <a
+                    href="{{ url_for('ver_oferta', id=oferta['id']) }}"
+                    class="btn btn-primary btn-sm"
+                  >
+                    <i class="fa-solid fa-eye"></i>
+                  </a>
+
+                  <a
+                    href="{{ url_for('editar_oferta', id=oferta['id']) }}"
+                    class="btn btn-warning btn-sm"
+                  >
+                    <i class="fa-solid fa-pen"></i>
+                  </a>
+
+                  <a
+                    href="{{ url_for('eliminar_oferta', id=oferta['id']) }}"
+                    class="btn btn-danger btn-sm"
+                    onclick="return confirm('¿Desea eliminar esta oferta?');"
+                  >
+                    <i class="fa-solid fa-trash"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            {% endfor %} {% else %}
+
+            <tr>
+              <td colspan="10" class="text-center">
+                No existen ofertas registradas
+              </td>
+            </tr>
+
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Accesibilidad -->
+
+<div class="accesibilidad">
+  <button onclick="zoomIn()">
+    <i class="fa-solid fa-plus"></i>
+  </button>
+
+  <button onclick="zoomOut()">
+    <i class="fa-solid fa-minus"></i>
+  </button>
+</div>
+
+<!-- Ayuda -->
+
+<button class="btn-ayuda">
+  <i class="fa-solid fa-circle-question"></i>
+</button>
+
+{% endblock %}
